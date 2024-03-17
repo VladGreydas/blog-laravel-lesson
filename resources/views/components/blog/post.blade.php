@@ -1,10 +1,9 @@
 <div class="post fl-wrap fw-post">
     <h2><span>{{ $post->title }}</span></h2>
     <ul class="blog-title-opt">
-        <li><a href="#">{{$post->created_at}}</a></li>
+        <li><a href="#">{{$post->created_at->format('d M y')}}</a></li>
         <li> - </li>
-        <li><a href="#">Interviews </a></li>
-        <li><a href="#">Design</a></li>
+        <li><a href="#" style="text-transform: uppercase">{{$post->category?->name}} </a></li>
     </ul>
     <!-- blog media -->
     <div class="blog-media fl-wrap">
@@ -26,9 +25,9 @@
         <div class="pr-tags fl-wrap">
             <span>Tags : </span>
             <ul>
-                <li><a href="#">Design</a></li>
-                <li><a href="#">Photography</a></li>
-                <li><a href="#">Fasion</a></li>
+                @foreach($post->tags as $tag)
+                    <li><a href="#">{{$tag->name}}</a></li>
+                @endforeach
             </ul>
         </div>
         <p>

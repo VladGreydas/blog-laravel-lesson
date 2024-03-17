@@ -25,7 +25,8 @@ class StoreRequest extends FormRequest
             'title' => 'required|string|max:250',
             'description' => 'required|string|max:2000',
             'body' => 'required|string|max:2000',
-            'cover' => 'required|string|max:250'
+            'cover' => 'required|string|max:250',
+            'category_id' => 'required|int|exists:App\Models\Category,id'
         ];
     }
 

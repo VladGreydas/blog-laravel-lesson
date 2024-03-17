@@ -1,6 +1,5 @@
 version: "3.9"
 services:
-
     #PHP Service Laravel Application
     app:
         build:
@@ -29,6 +28,8 @@ services:
           - MYSQL_USER=${DOCKER_DB_USERNAME}
           - MYSQL_PASSWORD=${DB_PASSWORD}
           - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      ports:
+          - "3306:3306"
       volumes:
         - ./docker/mysql:/var/lib/mysql
       networks:

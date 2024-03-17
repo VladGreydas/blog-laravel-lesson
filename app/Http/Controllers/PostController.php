@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Post\StoreRequest;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 
@@ -10,15 +11,15 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::with('category', 'tags')->get();
 
-        return view('index', compact('posts'));
+        return view('posts.index', compact('posts'));
 
     }
 
     public function create()
     {
-        return view('create');
+        return view('posts.create');
     }
 
     public function store(StoreRequest $request)
@@ -30,12 +31,13 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        return view('post', compact('post'));
+        $post->load('category', 'tags');
+        return view('posts.show', compact('post'));
     }
 
     public function edit(Post $post)
     {
-        return view('edit', compact('post'));
+        return view('posts.edit', compact('post'));
     }
 
     public function update(Post $post, StoreRequest $request)
