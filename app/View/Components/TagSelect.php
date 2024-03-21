@@ -11,14 +11,14 @@ use Illuminate\View\Component;
 class TagSelect extends Component
 {
     public Collection $tags;
-    public int|null $currentId;
+    public Collection|null $current;
     /**
      * Create a new component instance.
      */
-    public function __construct($id = null)
+    public function __construct($current = null)
     {
         $this->tags = Tag::all();
-        $this->currentId = $id;
+        $this->current = $current;
     }
 
     /**

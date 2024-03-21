@@ -4,6 +4,8 @@
         <li><a href="#">{{$post->created_at->format('d M y')}}</a></li>
         <li> - </li>
         <li><a href="#" style="text-transform: uppercase">{{$post->category?->name}} </a></li>
+        <li> - </li>
+        <li><a href="#">{{$post->user?->name}} </a></li>
     </ul>
     <!-- blog media -->
     <div class="blog-media fl-wrap">
@@ -34,12 +36,15 @@
             {{$post->description}}
         </p>
         <a href="{{ route('posts.show', compact('post')) }}" class="btn float-btn flat-btn" style="margin-right: 20px;">Read more </a>
+        @auth
+            @can('postOwner', $post)
         <a href="{{ route('posts.edit', compact('post')) }}" class="btn float-btn flat-btn" style="margin-right: 20px;">Edit </a>
         <form action="{{ route('posts.destroy', compact('post')) }}" method="post">
             @method('DELETE')
             @csrf
             <button type="submit" class="btn float-btn flat-btn">Delete post </button>
         </form>
-
+            @endcan
+        @endauth
     </div>
 </div>

@@ -13,7 +13,7 @@
                             @csrf
                             @method('PUT')
                             <x-category-select :id="$post->category_id" />
-                            <x-tag-select />
+                            <x-tag-select :current="$post->tags" />
 
                             <x-blog.input :post="$post" />
                             <button type="submit"  id="submit"  data-top-bottom="transform: translateY(-50px);" data-bottom-top="transform: translateY(50px);"><span>Save </span></button>

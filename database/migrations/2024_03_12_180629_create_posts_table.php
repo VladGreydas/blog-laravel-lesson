@@ -22,6 +22,9 @@ return new class extends Migration
                 ->nullable()
                 ->constrained()
                 ->onDelete('set null');
+            $table->foreignIdFor(\App\Models\User::class)
+                ->constrained()
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

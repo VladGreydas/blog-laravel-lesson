@@ -2,17 +2,11 @@
 
 namespace App\Http\Requests\Post;
 
+use App\Http\Requests\Common\BaseRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class StoreRequest extends BaseRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -26,7 +20,8 @@ class StoreRequest extends FormRequest
             'description' => 'required|string|max:2000',
             'body' => 'required|string|max:2000',
             'cover' => 'required|string|max:250',
-            'category_id' => 'required|int|exists:App\Models\Category,id'
+            'category_id' => 'required|int|exists:App\Models\Category,id',
+            'user_id' => 'int|exists:App\Models\User,id',
         ];
     }
 
@@ -42,5 +37,12 @@ class StoreRequest extends FormRequest
             'description.required' => 'A title is required',
             'body.required' => 'A message is required',
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'user_id' => auth()->id()
+        ]);
     }
 }

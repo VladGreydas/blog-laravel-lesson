@@ -20,7 +20,8 @@ class Post extends Model
         'description',
         'body',
         'cover',
-        'category_id'
+        'category_id',
+        'user_id'
     ];
 
     public function category(): BelongsTo
@@ -31,5 +32,10 @@ class Post extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

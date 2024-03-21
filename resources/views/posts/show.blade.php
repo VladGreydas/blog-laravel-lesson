@@ -9,6 +9,8 @@
                     <li><a href="#">{{$post->created_at->format('d M y')}}</a></li>
                     <li> - </li>
                     <li><a href="#" style="text-transform: uppercase">{{$post->category?->name}} </a></li>
+                    <li> - </li>
+                    <li><a href="#">{{$post->user?->name}} </a></li>
                 </ul>
                 <!-- blog media -->
                 <div class="blog-media fl-wrap">
@@ -68,7 +70,7 @@
                     <img alt='' src="images/blog/1.jpg">
                 </div>
                 <div class="author-content">
-                    <h5><a href="#">Jane Kowalski</a></h5>
+                    <h5><a href="#">{{$post->user?->name}}</a></h5>
                     <p>At one extremity the rope was unstranded, and the separate spread yarns were all braided and woven round the socket of the harpoon; the pole was then driven hard up into the socket; from the lower end the rope was traced half-way along the pole’s length, and firmly secured so, with intertwistings of twine.</p>
                     <div class="author-social">
                         <ul>
