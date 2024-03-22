@@ -1,4 +1,11 @@
 <header class="main-header">
+    <div class="header-contacts">
+        <ul>
+            @auth
+            <li><a href="#"><span>User: </span>{{auth()->user()->name}}</a> </li>
+            @endauth
+        </ul>
+    </div>
         <a class="logo-holder" href="{{ route('posts.index') }}"><img src="{{asset('images/logo.png')}}" alt=""></a>
         <!-- search button-->
         <div class="show-sibedar vissidebar"></div>
