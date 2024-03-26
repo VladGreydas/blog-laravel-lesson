@@ -17,9 +17,10 @@ class StoreRequest extends BaseRequest
     {
         return [
             'title' => 'required|string|max:250',
+            'slug' => 'required|string|unique:App\Models\Post,slug|max:250',
             'description' => 'required|string|max:2000',
             'body' => 'required|string|max:2000',
-            'cover' => 'required|string|max:250',
+            'cover' => 'required|file',
             'category_id' => 'required|int|exists:App\Models\Category,id',
             'user_id' => 'int|exists:App\Models\User,id',
         ];
@@ -42,7 +43,8 @@ class StoreRequest extends BaseRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'user_id' => auth()->id()
+            'user_id' => auth()->id(),
+            'slug' => str($this->title)->slug()->toString()
         ]);
     }
 }

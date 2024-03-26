@@ -16,7 +16,7 @@ class CommentController extends Controller
     public function store(StoreRequest $request): RedirectResponse
     {
         $comment = Comment::query()->create($request->validated());
-        return to_route('posts.show', ['post' => $comment->post_id]);
+        return to_route('posts.show', ['post' => $comment->post]);
     }
 
     /**
@@ -26,7 +26,7 @@ class CommentController extends Controller
     {
         Gate::authorize('commentOwner', $comment);
         $comment->update($request->validated());
-        return to_route('posts.show', ['post' => $comment->post_id]);
+        return to_route('posts.show', ['post' => $comment->post]);
     }
 
     /**
@@ -36,6 +36,6 @@ class CommentController extends Controller
     {
         Gate::authorize('commentOwner', $comment);
         $comment->delete();
-        return to_route('posts.show', ['post' => $comment->post_id]);
+        return to_route('posts.show', ['post' => $comment->post]);
     }
 }

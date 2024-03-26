@@ -18,12 +18,18 @@ class Post extends Model
 
     protected $fillable = [
         'title',
+        'slug',
         'description',
         'body',
         'cover',
         'category_id',
         'user_id'
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug'; //44:30
+    }
 
     public function category(): BelongsTo
     {

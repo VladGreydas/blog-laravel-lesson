@@ -2,7 +2,6 @@
 <p style="color: #a90707">{{$message}}</p>
 @enderror
 <input name="title" type="text" id="title" placeholder="Title" value="{{old('title', $post->title ?? '')}}">
-<input name="cover" type="hidden" id="cover" placeholder="Title" value="cover">
 @error('description')
 <p style="color: #a90707">{{$message}}</p>
 @enderror
