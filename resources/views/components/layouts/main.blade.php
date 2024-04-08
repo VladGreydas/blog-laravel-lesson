@@ -103,15 +103,6 @@
             </div>
         </div>
         <!-- sb-widget-wrap end-->
-        <!-- sb-widget-wrap-->
-        <div class="sb-widget-wrap fl-wrap">
-            <h3>Our Twitter</h3>
-            <div class="sb-widget  fl-wrap">
-                <div id="footer-twiit"></div>
-                <a  href="#" target="_blank" class="twiit-button"> <i class="fa fa-twitter"></i> Follow Us</a>
-            </div>
-        </div>
-        <!-- sb-widget-wrap end-->
     </div>
     <!-- sidebar end -->
     <!--search-form-holder -->
@@ -119,8 +110,8 @@
         <div class="search-form-bg"></div>
         <div class="search-form-wrap">
             <div class="container">
-                <form class="searchform" method="get"  >
-                    <input type="text" autocomplete="off"   name="s" placeholder="Type and Enter to Search">
+                <form class="searchform" method="get" action="{{ route('posts.index') }}" >
+                    <input type="text" autocomplete="off" name="s" placeholder="Search...">
                 </form>
                 <div class="close-fixed-search"></div>
             </div>

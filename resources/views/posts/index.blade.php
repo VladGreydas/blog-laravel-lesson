@@ -1,8 +1,11 @@
 <x-layouts.main>
     @foreach($posts as $post)
-        <x-blog.post :post="$post"/>
-    @endforeach
+        @forelse($posts as $post)
+            <x-blog.post :post="$post" />
+            @endforeach
+        @empty
+            <h2>404 NOT FOUND</h2>
+        @endforelse
 
-    {{$posts->links()}}
-
+        {{ $posts->links() }}
 </x-layouts.main>

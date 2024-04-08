@@ -5,21 +5,25 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Post\StoreRequest;
 use App\Http\Requests\Post\UpdateRequest;
 use App\Http\Requests\Tag\IdArrayRequest;
-use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller implements HasMiddleware
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $posts = Post::with('category', 'tags', 'user')->paginate(4);
+        $posts = Post::with('category', 'tags', 'user')
+            ->byCategory($request->category)
+            ->byTag($request->tag)
+            ->search($request->s)
+            ->paginate(4)
+            ->withQueryString();
 
         return view('posts.index', compact('posts'));
 
@@ -49,7 +53,10 @@ class PostController extends Controller implements HasMiddleware
     public function show(Post $post): View
     {
         $post->load('category', 'tags', 'user', 'comments.user');
-        return view('posts.show', compact('post'));
+
+        $isSubscribed = $post->user->readers()->where('reader_id', auth()->id())->exists();
+
+        return view('posts.show', compact('post', 'isSubscribed'));
     }
 
     public function edit(Post $post): View

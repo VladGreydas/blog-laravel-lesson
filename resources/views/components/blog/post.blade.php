@@ -3,7 +3,7 @@
     <ul class="blog-title-opt">
         <li><a href="#">{{$post->created_at->format('d M y')}}</a></li>
         <li> -</li>
-        <li><a href="#" style="text-transform: uppercase">{{$post->category?->name}} </a></li>
+        <li><a href="{{ route('posts.index', ['category' => $post->category->id]) }}" style="text-transform: uppercase">{{$post->category?->name}} </a></li>
         <li> -</li>
         <li><a href="#">{{$post->user?->name}} </a></li>
     </ul>
@@ -26,7 +26,7 @@
             <span>Tags : </span>
             <ul>
                 @foreach($post->tags as $tag)
-                    <li><a href="#">{{$tag->name}}</a></li>
+                    <li><a href="{{ route('posts.index', ['tag' => $tag->name]) }}">{{$tag->name}}</a></li>
                 @endforeach
             </ul>
         </div>
