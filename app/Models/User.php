@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -45,6 +46,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'role' => UserRoleEnum::class
         ];
     }
 
@@ -75,6 +77,6 @@ class User extends Authenticatable
 
     public function isAdmin(): bool
     {
-        return $this->role === UserRoleEnum::ADMIN->value;
+        return $this->role->value === UserRoleEnum::ADMIN->value;
     }
 }

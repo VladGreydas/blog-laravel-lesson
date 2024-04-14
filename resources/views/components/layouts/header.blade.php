@@ -2,7 +2,7 @@
     <div class="header-contacts">
         <ul>
             @auth
-            <li><a href="#"><span>User: </span>{{auth()->user()->name}}</a> </li>
+                <li><a href="#"> <span>{{ auth()->user()->role->name }} :</span> {{ auth()->user()->name }}</a></li>
             @endauth
         </ul>
     </div>
@@ -26,28 +26,42 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="{{route('posts.index')}}">Blog </a>
+                        <a href="{{ route('posts.index') }}">{{ __('menu.blog') }}</a>
                         <!--second level -->
                         <!--second level end-->
                     </li>
                     @auth
-                    <li>
-                        <a href="{{route('posts.create')}}">Create</a>
-                    </li>
+                        <li>
+                            <a href="{{ route('posts.create') }}">{{ __('menu.create') }}</a>
+                        </li>
+                        @if(auth()->user()->isAdmin())
+                            <li>
+                                <a href="{{ route('admin.index') }}">{{ __('menu.admin') }}</a>
+                            </li>
+                        @endif
                     @endauth
                     @guest
-                    <li>
-                        <a href="{{route('register')}}">Register</a>
-                    </li>
-                    <li>
-                        <a href="{{route('login')}}">Login</a>
-                    </li>
+                        <li>
+                            <a href="{{ route('register') }}">{{ __('menu.register') }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('login') }}">{{ __('menu.login') }}</a>
+                        </li>
                     @endguest
                     @auth
-                    <li>
-                        <a onclick="document.querySelector('#logout').submit()" style="cursor: pointer">Logout</a>
-                    </li>
+                        <li>
+                            <a onclick="document.querySelector('#logout').submit()"
+                               style="cursor: pointer">{{ __('menu.logout') }}</a>
+                        </li>
                     @endauth
+                        <li>
+                            <form action="{{ route('locale') }}" id="locale" class="d-inline">
+                                <select name="lang" id="" onchange="document.querySelector('#locale').submit()">
+                                    <option @selected(app()->getLocale() === 'en') value="en">EN</option>
+                                    <option @selected(app()->getLocale() === 'uk') value="uk">UA</option>
+                                </select>
+                            </form>
+                        </li>
                 </ul>
             </nav>
         </div>
